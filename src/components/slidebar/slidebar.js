@@ -30,7 +30,7 @@ function Sidebar() {
                         <ListItem
                             button
                         >
-                            <ListItemText primary="Home" />
+                            <ListItemText primary="Dashboard" />
                         </ListItem>
                     </NavLink>
                     <NavLink className="nav-link" to='/progress'>
