@@ -40,6 +40,13 @@ function Sidebar() {
                             <ListItemText primary="Progress" />
                         </ListItem>
                     </NavLink>
+                    <NavLink className="nav-link" to='/subject'>
+                        <ListItem
+                            button
+                        >
+                            <ListItemText primary="subject" />
+                        </ListItem>
+                    </NavLink>
 
                 </List>
             </div>
