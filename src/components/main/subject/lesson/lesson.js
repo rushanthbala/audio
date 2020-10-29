@@ -9,9 +9,11 @@ import {
   Link,
   useHistory,
   useLocation,
-  useParams
+  useParams,
+  useRouteMatch
 } from "react-router-dom";
 import Chapter from '../../../../layouts/chapter'
+import PodcastAudio from '../podcast/podcastAudio';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -24,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Subjects = [
-  { id: 0, subject:"Maths", chapter: ["chap1", "chap2","chap3"], descripe: "des000" },
-  { id: 1, subject:"Maths", chapter: ["chap1", "chap2","chap3"], descripe: "descripe11" },
-  { id: 2,  subject:"Science",chapter: ["chap1", "chap2","chap3"], descripe: "descripe" },
-  { id: 3, subject:"History", chapter:["chap1", "chap2","chap3"], descripe: "descripe" },
-  { id: 4, subject:"Commerce", chapter:["chap1", "chap2","chap3"], descripe: "descripe" },
-  { id: 5, subject:"It", chapter:["chap1", "chap2","chap3"], descripe: "descripe" },
-  { id: 6, subject:"Tamil", chapter:["chap1", "chap2","chap3"], descripe: "descripe" }
+  { id: 0, subject:"Maths", chapter: ["chap1", "chap2","chap3"], descripe:  ["chap1", "chap2","chap3"], },
+  { id: 1, subject:"Maths", chapter: ["chap1", "chap2","chap3"], descripe:  ["descripe1", "descripe2","descripe3"],},
+  { id: 2,  subject:"Science",chapter: ["chap1", "chap2","chap3"], descripe:["descripe1", "descripe2","descripe3"]},
+  { id: 3, subject:"History", chapter:["chap1", "chap2","chap3"], descripe:["descripe1", "descripe2","descripe3"] },
+  { id: 4, subject:"Commerce", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] },
+  { id: 5, subject:"It", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] },
+  { id: 6, subject:"Tamil", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] }
 ];
 
 const SubjectTitle = [
@@ -69,16 +71,25 @@ function Dashboard() {
     <div>
       <Switch location={background || location}>
         <Route exact path="/subject" children={<SubjectHome />} />
-        <Route path="/subject/:id" children={<ChapterCard />} />
-        <Route path="/subject/:id/:id" children={<SubjectHome />} />
+        <Route exact path="/subject/:id" children={<ChapterCard />} />
+        <Route path="/subject/:id/:id" children={<ChapterAudio />} />
+        {/* <Route path="/subject/:id/:id/:id" children={<ChapterCard />} /> */}
       </Switch>
     </div>
   )
 }
 
+function ChapterAudio() {
+  let location = useLocation();
+  return (
+    <div>
+      <PodcastAudio chapter='dsfed' />
+    </div>
+  );
+}
+
 function SubjectHome() {
   let location = useLocation();
-
   return (
     <div>
       {SubjectTitle.map(i => (
@@ -98,7 +109,10 @@ function SubjectHome() {
 
 function ChapterCard() {
   let { id } = useParams();
+  let { url } = useRouteMatch();
+
   let subject = Subjects[parseInt(id, 10)] 
+
   { console.log(id) }
 
   if (!subject) return <div>Image not found</div>;
@@ -106,13 +120,11 @@ function ChapterCard() {
   return (
     <div>
       <h1>{subject.subject}</h1>
-      <Chapter chapter={subject.chapter[0]}  descripe={subject.descripe} />
+      <Chapter chapter={subject.chapter[0]}  descripe={subject.descripe[0]} href={`${url}/${id}`} />
     <div style={{backgroundColor:'beige'}} >
-    <Chapter chapter={subject.chapter[1]}  descripe={subject.descripe} />
-
+    <Chapter chapter={subject.chapter[1]}  descripe={subject.descripe[1]} />
     </div>
-
-      <Chapter chapter={subject.chapter[2]}  descripe={subject.descripe} />
+      <Chapter chapter={subject.chapter[2]}  descripe={subject.descripe[2]} />
     </div>
   );
 }

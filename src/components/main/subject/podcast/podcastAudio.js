@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Chapter(props) {
+function PodcastAudio(props) {
   let { url } = useRouteMatch();
   let { id } = useParams();
 
@@ -29,17 +29,17 @@ function Chapter(props) {
   return (
     <div>
     
-        <Link to={href} >
+        {/* <Link to={href} > */}
           <div className={classes.Main}>
             <div>
               {chapter}
             </div>
             <br />
             <div>
-              {descripe}
+              {descripe}asds
             </div>
           </div>
-        </Link>
+        {/* </Link> */}
 
      
     </div>
@@ -53,6 +53,7 @@ function ChapterAudio(props) {
   return (
     <div>
       asdasdasd
+      {/* <PodcastAudio     /> */}
     </div>
   );
 }
@@ -60,4 +61,4 @@ function ChapterAudio(props) {
 
 
 
-export default Chapter;
+export default PodcastAudio;
