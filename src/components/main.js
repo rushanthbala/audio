@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navbar from './navbar/navbar'
+import Navbar from '../navbar'
 import Footer from './footer'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Dashboard from './main/dashboard/dashboard'
@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     main: {
-        marginLeft: '160px', /* Same as the width of the sidenav */
+        marginLeft: '260px', /* Same as the width of the sidenav */
         fontSize: '28px', /* Increased text to enable scrolling */
         padding: '0px 10px',
       }

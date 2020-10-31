@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   button: {
-    background: ' #FF2222 0% 0% no-repeat padding-box',
+    background: ' #6A5CF8 0% 0% no-repeat padding-box',
     opacity: '1',
     font: 'normal normal 900 12px/16px Avenir',
     borderRadius: '23px',
@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
     textTransform: 'uppercase',
     '&:hover': {
       background: 'transparent',
-      border: '1px solid  #FF2222',
-      color: 'red',
+      border: '1px solid  #6A5CF8',
+      color: '#6A5CF8',
       boxShadow: 'none',
     },
   },
@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function ButtonCore(props) {
+function  ButtonCore(props) {
   const classes = useStyles(props);
   const {href,title} = props.data
   return (

@@ -14,12 +14,47 @@ import {
 } from "react-router-dom";
 import Chapter from '../../../../layouts/chapter'
 import PodcastAudio from '../podcast/podcastAudio';
+import student from "../../../../assects/image/stu01.jpeg";
+import {Typography} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    marginLeft: '160px', /* Same as the width of the sidenav */
-    fontSize: '28px', /* Increased text to enable scrolling */
-    padding: '0px 10px',
+  containerButtons: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width:'100%',
+    margin:'0 auto',
+    maxWidth:'500px',
+    justifyContent: 'center',
+    '& > :nth-child(n+1)': {
+      margin: '12px',
+    },
+  },
+  containerSubject:{
+    marginTop:'80px',
+    width:'100%',
+    margin:'0 auto',
+    maxWidth:'500px',
+    justifyContent: 'center'
+  },
+  avatarFrame: {
+    height: '64px',
+    width: '64px',
+  },
+  avatar: {
+    width: '100%',
+    height: 'auto',
+    borderRadius: '50%',
+    border: '3px solid white',
+    boxShadow: '0 12px 18px rgba(47, 47,51, 0.16)'
+  },
+  nameset:{
+    display:'flex',
+  },
+  name:{
+    paddingLeft:"10px"
+  },
+  select:{
+    paddingLeft:'20px'
   }
 
 }));
@@ -27,12 +62,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Subjects = [
   { id: 0, subject:"Maths", chapter: ["chap1", "chap2","chap3"], descripe:  ["chap1", "chap2","chap3"], },
-  { id: 1, subject:"Maths", chapter: ["chap1", "chap2","chap3"], descripe:  ["descripe1", "descripe2","descripe3"],},
-  { id: 2,  subject:"Science",chapter: ["chap1", "chap2","chap3"], descripe:["descripe1", "descripe2","descripe3"]},
-  { id: 3, subject:"History", chapter:["chap1", "chap2","chap3"], descripe:["descripe1", "descripe2","descripe3"] },
-  { id: 4, subject:"Commerce", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] },
-  { id: 5, subject:"It", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] },
-  { id: 6, subject:"Tamil", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] }
+  { id: 1, subject:"Maths", chapter: ["chap1", "chap2","chap3"],
+    descripe:  ["Photosynthesis is a process used by plants and other organisms to convert light energy into chemical energy that can later be released to fuel the organisms' activities.", "Chemistry is the scientific discipline involved with elements and compounds composed of atoms, molecules and ions: their composition, structure, properties, behavior and the changes they undergo during a reaction with other substances.","Mammal, a vertebrate animal whose young are nourished with milk from special mammary glands of the mother."],
+    podcast:["3","4","5"],
+    gem:['4','2','1'],
+    page:['67','76','44']
+  },
+
+  { id: 2,  subject:"Science",chapter: ["chap1", "chap2","chap3"], descripe:["descripe1", "descripe2","descripe3"]  ,podcast:["3","4","5"],
+    gem:['4','2','1'],
+    page:['67','76','44']},
+  { id: 3, subject:"History", chapter:["chap1", "chap2","chap3"], descripe:["descripe1", "descripe2","descripe3"], podcast:["3","4","5"],
+    gem:['4','2','1'],
+    page:['67','76','44'] },
+  { id: 4, subject:"Commerce", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] , podcast:["3","4","5"],
+    gem:['4','2','1'],
+    page:['67','76','44']},
+  { id: 5, subject:"It", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] , podcast:["3","4","5"],
+    gem:['4','2','1'],
+    page:['67','76','44']},
+  { id: 6, subject:"Tamil", chapter:["chap1", "chap2","chap3"], descripe: ["descripe1", "descripe2","descripe3"] , podcast:["3","4","5"],
+    gem:['4','2','1'],
+    page:['67','76','44']}
 ];
 
 const SubjectTitle = [
@@ -90,19 +141,32 @@ function ChapterAudio() {
 
 function SubjectHome() {
   let location = useLocation();
-  return (
-    <div>
-      {SubjectTitle.map(i => (
-        <Link
-          key={i.id}
-          to={{
-            pathname: `/subject/${i.href}`
-          }}
+  const classes = useStyles();
 
-        >
-          <Button data={i} />
-        </Link>
-      ))}
+  return (
+    <div  className={classes.containerSubject}>
+      <div className={classes.nameset} >
+        <div className={classes.avatarFrame}>
+        <img src={student} className={classes.avatar}/>
+        </div>
+        <Typography variant="h3" className={classes.name} >Hi! Natasha</Typography>
+      </div>
+      <div>
+        <Typography variant="h5" className={classes.select}> Select Your Subject</Typography>
+      </div>
+     <div className={classes.containerButtons}>
+       {SubjectTitle.map(i => (
+           <Link
+               key={i.id}
+               to={{
+                 pathname: `/subject/${i.href}`
+               }}
+               style={{ textDecoration: 'none' }}
+           >
+             <Button data={i} />
+           </Link>
+       ))}
+     </div>
     </div>
   );
 }
@@ -120,11 +184,21 @@ function ChapterCard() {
   return (
     <div>
       <h1>{subject.subject}</h1>
-      <Chapter chapter={subject.chapter[0]}  descripe={subject.descripe[0]} href={`${url}/${id}`} />
+      <Chapter chapter={subject.chapter[0]}  descripe={subject.descripe[0]} href={`${url}/${id}`}
+      podcast={subject.podcast[0]}
+      gem={subject.gem[0]}
+      page={subject.page[0]}
+      />
     <div style={{backgroundColor:'beige'}} >
-    <Chapter chapter={subject.chapter[1]}  descripe={subject.descripe[1]} />
+    <Chapter chapter={subject.chapter[1]}  descripe={subject.descripe[1]}  href={`${url}/${id}`}
+             podcast={subject.podcast[1]}
+             gem={subject.gem[1]}
+             page={subject.page[1]}/>
     </div>
-      <Chapter chapter={subject.chapter[2]}  descripe={subject.descripe[2]} />
+      <Chapter chapter={subject.chapter[2]}  descripe={subject.descripe[2]}  href={`${url}/${id}`}
+               podcast={subject.podcast[2]}
+               gem={subject.gem[2]}
+               page={subject.page[2]}/>
     </div>
   );
 }

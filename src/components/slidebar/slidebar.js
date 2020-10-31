@@ -9,7 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 const useStyles = makeStyles((theme) => ({
     sidebar: {
         height: '100%',
-        width: '160px',
+        width: '260px',
         position: 'fixed',
         zIndex: '1',
         top: '0',
